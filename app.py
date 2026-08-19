@@ -21,7 +21,7 @@ st.divider()
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_excel("data/flight_data.xlsx")
+        df = pd.read_excel("small_flight_data.csv")
         # Ensure 'Price' column exists before dropping NAs
         if 'Price' in df.columns:
             df = df.dropna(subset=['Price']) 
