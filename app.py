@@ -49,16 +49,14 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- 3. Robust Cached Data Loading (Strictly CSV & Fallback) ---
+# --- 3. Robust Cached Data Loading ---
 @st.cache_data
 def load_data():
     try:
-        # GUARANTEED SAFE: Using read_csv instead of read_excel
         df = pd.read_csv("small_flight_data.csv")
         df.columns = df.columns.str.strip()
         loaded = True
     except Exception:
-        # Safe fallback synthetic data if CSV is missing
         np.random.seed(42)
         n = 400
         airlines = np.random.choice(['IndiGo', 'Air India', 'Vistara', 'SpiceJet'], n)
@@ -76,13 +74,12 @@ def load_data():
             'Source': sources,
             'Total_Stops': stops,
             'Duration_Hours': duration,
-            'Refund_Policy':refundable_status,
+            'Refund_Policy': refundable_status,
             'Cancellation_Fee': cancellation_fee,
             'Price': price.astype(int)
         })
         loaded = False
 
-    # Clean and convert any price column safely
     for col in df.columns:
         if 'price' in col.lower() or 'cost' in col.lower():
             df[col] = df[col].astype(str).str.replace(r'[^0-9.]', '', regex=True)
@@ -287,7 +284,7 @@ with tab2:
                         
             predicted_price = model.predict(input_df)[0]
             st.success(f"🎉 **Estimated Flight Ticket Price:** ₹{predicted_price:,.2f}")
-            st.balloons()
+            # Balloons removed successfully
 
         st.divider()
         st.markdown("#### 🌟 Key Feature Importance Breakdown")
