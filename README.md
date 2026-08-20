@@ -1,4 +1,6 @@
 # ✈️ AI Travel Analyst
+You can view the live application here:
+[View AI Travel Analyst App](https://ai-travel-analyst-3wvdehaxbetenkwznzgtms.streamlit.app/)
 **MIC AIML Recruitment Challenge — 2nd Year Data Science Track**
 
 ## 📌 Project Overview
